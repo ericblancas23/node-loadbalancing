@@ -1,6 +1,8 @@
 const fs = require('fs');
-const express = require('express')
+const express = require('express');
 const https = require('https');
+const proxyRouter = require('./routes/proxy');
+app.use('/app', proxyRouter);
 
 const options = {
     key: fs.readFileSync('./ssl/key.pem'),
@@ -10,3 +12,4 @@ const options = {
 https.createServer(options, app).listen(443, () => {
     console.log('load balancer has started')
 })
+
