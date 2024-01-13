@@ -33,4 +33,12 @@ router.all('*', (req, res) => {
     proxy(proxyOptions)(req, res);
 });
 
+let healthyServers = [];
+
+router.all('*', (req, res) => {
+    if (healthyServers.length === 0) {
+        return res.status(500).send('No healthy servers available');
+    }
+})
+
 module.exports = router;
